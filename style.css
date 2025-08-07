@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body {
-  background-image: url('https://files.catbox.moe/c61a8u.jpeg');
+  background-image: url('images/kontor.jpeg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -40,8 +40,8 @@ body {
 .mole {
   position: absolute;
   bottom: 0;
-  width: 100%;
-  height: 100%;
+  width: 105%;
+  height: 105%;
   object-fit: contain;
   opacity: 0;
   pointer-events: none;
@@ -57,8 +57,9 @@ body {
 
 .mole-hit {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  bottom: 0;
+  width: 105%;
+  height: 105%;
   object-fit: contain;
   opacity: 0;
   pointer-events: none;
