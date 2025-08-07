@@ -20,18 +20,24 @@ function startGame(){
  
     if (!randomSquare.classList.contains('active')){
     randomSquare.classList.add('active');
-    mole.addEventListener('pointerdown', handleClick);
+    mole.addEventListener('pointerdown', () => handleClick(randomSquare), {once: true});
     }
     setTimeout(() => {
     randomSquare.classList.remove('active');
-    mole.removeEventListener('pointerdown', handleClick);
+    mole.removeEventListener('pointerdown', handler);
     }, 1700)
   }, 2000)
 }
 }
 
-function handleClick(){
-  const timer = new Date();
+function handleClick(randomSquare){
+    randomSquare.classList.remove('active');
+    randomSquare.classList.add('hit');
+
+    setTimeout(() => {
+    randomSquare.classList.remove('hit');
+    }, 1000)
+  currentScore++;
 }
 
 

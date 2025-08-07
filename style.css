@@ -37,8 +37,7 @@ body {
   width: 90vmin;
   max-width: 500px;
 }
-.mole,
-.mole-hit {
+.mole {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -53,6 +52,19 @@ body {
 .square.active .mole {
   opacity: 1;
   transform: translateY(0);
+  pointer-events: auto;
+}
+
+.mole-hit {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  pointer-events: none;
+}
+.square.hit .mole-hit {
+  opacity: 1;
   pointer-events: auto;
 }
 
