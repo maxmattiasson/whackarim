@@ -3,6 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+html, body {
+  touch-action: manipulation;
+}
 body {
   background-image: url('images/kontor.jpeg');
   background-size: cover;
@@ -98,7 +101,7 @@ body {
 
 #score {
   background-color: rgb(240, 248, 255, 0.7);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   padding: 5px;
   border-radius: 10px;
 }
@@ -110,6 +113,7 @@ body {
   border-radius: 15px;
   color: white;
   font-family: serif;
+  font-size: 1.5rem;
   border: 2px solid white;
   font-weight: bold;
 }
