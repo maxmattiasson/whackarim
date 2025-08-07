@@ -1,26 +1,74 @@
-#board{
-  border: 1px solid black;
-  width: 75vw;
-  height: 80vh;
-  display: flex;
-  flex-wrap: wrap;
-  flex: 1 1;
-}
-.square{
-  border: 1px solid black;
-  width: 25vw;
-  height: 20vh;
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+}
+body {
+  background-image: url('https://files.catbox.moe/c61a8u.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #111;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+#game {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.square {
+  border: 4px solid black;
   border-radius: 50%;
-
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: rgb(240, 248, 255, 0.7);
 }
-.toClick{
-  background-color: green;
+
+#board {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  aspect-ratio: 1/1;
+  width: 90vmin;
+  max-width: 500px;
+}
+.mole,
+.mole-hit {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
 }
 
-.game {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.square.active .mole {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.hole {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.title {
+  font-size: 2rem;
+  color: white;
+  background-color: rgb(34, 43, 47);
+  border-radius: 10px;
+  padding: 10px;
 }
