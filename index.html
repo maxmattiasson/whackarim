@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Väck-ett-Vik</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
 </head>
 <body>
 <div id="game">
   <div class="title">Väck-a-Vikarie</div>
-  <button id="go">Kör!</button>
-  <div id="points">Poäng: <span id="score">0</span></div>
+  <button id="go">Starta!</button>
+  <span id="score">Poäng: 0</span>
   <div id="board">  
     <div class="square" id="1"><img class="hole" src="images/stol.png" alt="stol"><img class="mole" src="images/sover.png" alt="mole"><img class="mole-hit" src="images/vaken.png" alt="vaken"></div>
     <div class="square" id="2"><img class="hole" src="images/stol.png"><img class="mole" src="images/sover.png" alt="mole"><img class="mole-hit" src="images/vaken.png" alt="vaken"></div>
@@ -22,7 +25,7 @@
     <div class="square" id="8"><img class="hole" src="images/stol.png"><img class="mole" src="images/sover.png" alt="mole"><img class="mole-hit" src="images/vaken.png" alt="vaken"></div>
     <div class="square" id="9"><img class="hole" src="images/stol.png"><img class="mole" src="images/sover.png" alt="mole"><img class="mole-hit" src="images/vaken.png" alt="vaken"></div>
   </div>
-  <div id="countdown">Tid kvar: <span class="timer">20 s</span></div>
+  <div id="countdown">Tid kvar: <span id="timer">20</span></div>
 </div>
     <script src="script.js"></script>
 </body>
