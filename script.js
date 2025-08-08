@@ -3,6 +3,8 @@ const score = document.getElementById('score');
 const startButton = document.getElementById('go');
 const clock = document.getElementById('timer');
 const puntos = document.getElementById('points');
+const soundSpawn = document.getElementById('s-spawn');
+const soundHit = document.getElementById('s-hit');
 
 let runGame = false;
 let currentScore = 0;
@@ -30,6 +32,7 @@ function startGame(){
  
     if (!randomSquare.classList.contains('active')){
     randomSquare.classList.add('active');
+    playSpawn();
     mole.addEventListener('pointerdown', () => handleClick(randomSquare, spawnTime), {once: true});
     }
     setTimeout(() => {
@@ -61,7 +64,7 @@ function handleClick(randomSquare, spawnTime){
 } else {
   points = 1;
 }
-
+    playHit();
     currentScore += points;
     score.textContent = `Poäng: ${currentScore}`;
   
@@ -81,4 +84,13 @@ function stopGame(){
   setTimeout(() => {
     score.textContent = `Bra jobbat! Du fick ${currentScore} poäng`;
   }, 2000)
+}
+
+function playSpawn() {
+  soundSpawn.currentTime = 0;
+  soundSpawn.play();
+}
+function playHit() {
+  soundHit.currentTime = 0;
+  soundHit.play();
 }
