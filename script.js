@@ -25,6 +25,13 @@ let spawns = 0;
 let spawnTimeoutId = null;
 
 const despawnTimers = new Map();
+const BACKEND_URL = 'https://lolguesser-backend.onrender.com/api/wam';
+
+const LS_KEYS = {
+  name: 'wamName',
+  high: 'wamHigh',
+  submitted: 'wamSubmittedHigh',
+};
 
 const lerp = (a, b, t) => a + (b - a) * t;
 function nextDelay(i) {
@@ -168,13 +175,7 @@ game.addEventListener('touchmove', (e) => {
 }, { passive: false });
 
 // ===== Leaderboard / High Score local state =====
-const BACKEND_URL = 'https://lolguesser-backend.onrender.com/api/wam';
 
-const LS_KEYS = {
-  name: 'wamName',
-  high: 'wamHigh',
-  submitted: 'wamSubmittedHigh', // highest score we've already uploaded
-};
 
 function loadState() {
   return {
