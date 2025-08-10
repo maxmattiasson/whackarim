@@ -17,24 +17,22 @@
   <div class="title">Väck-a-Vikarie</div>
 
   <div class="btn-container">
-<button id="leaderboard-btn">👑 Topplista 👑</button><span id="highscore">Ditt highscore: 100</span>
-  </div>
-    <dialog id="myDialog">
-      <h2>Topplista</h2>
-        <ul>
-          <li>blabla 1203 points</li>
-          <li>blabla 1203 points</li>
-          <li>blabla 1203 points</li>
-          <li>blabla 1203 points</li>
-          <li>blabla 1203 points</li>
-          <li>blabla 1203 points</li>
-          <li>blabla 1203 points</li>
-          <li>blabla 1203 points</li>
-          <li>blabla 1203 points</li>
-          <li>blabla 1203 points</li>
-        </ul>
-      <button id="closeBtn">Close</button>
+<button id="leaderboard-btn">👑 Topplista 👑</button><span id="highscore">Ditt highscore: 100</span> <button id="submit-btn">🏆</button> 
+<dialog id="submit-dialog">
+    <form id="submit-form" method="dialog" class="submit-wrap">
+        <h3>High score</h3>
+        <div id="hs-line">Ditt bästa: <span id="hs-value">0</span> poäng</div>
+
+        <label for="player-name">Namn:</label>
+        <input id="player-name" name="player-name" type="text" placeholder="Your name" autocomplete="name" required />
+
+        <button id="submit-best" type="button">Skicka till Topplistan!</button>
+        <div id="submit-status"></div>
+    </form> 
+      <button id="closeBtn">Stäng</button>
     </dialog>
+  </div>
+
 <button id="go">Spela!</button> 
 
   <div id="board">  
