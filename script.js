@@ -174,8 +174,6 @@ game.addEventListener('touchmove', (e) => {
   e.preventDefault();
 }, { passive: false });
 
-// ===== Leaderboard / High Score local state =====
-
 
 function loadState() {
   return {
@@ -206,9 +204,7 @@ function canSubmitNow() {
   return high > 0 && high > submitted;
 }
 
-// Hydrate dialog UI whenever it opens
 dlg.addEventListener('close', () => {
-  // no-op, but kept if you want to react on close later
 });
 
 document.getElementById('submit-btn').addEventListener('click', () => {
@@ -233,7 +229,6 @@ function hydrateSubmitUI() {
   if (statusEl) statusEl.textContent = '';
 }
 
-// Save name as user types
 const nameInputEl = document.getElementById('player-name');
 if (nameInputEl) {
   nameInputEl.addEventListener('input', (e) => saveName(e.target.value));
@@ -255,7 +250,6 @@ if (submitBtnEl) {
       const res = await fetch(BACKEND_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // include auth/cookie if needed: credentials: 'include',
         body: JSON.stringify({ name, score: high }),
       });
 
@@ -280,7 +274,7 @@ function onGameEndPersistAndPrompt(finalScore) {
   hydrateSubmitUI();
   const { high, submitted } = loadState();
   if (finalScore === high && high > submitted) {
-    dlg.showModal(); // auto-open if new PB not yet submitted
+    dlg.showModal(); 
   }
 }
 
@@ -291,13 +285,12 @@ function renderHighBadge(){
 
 async function showLeaderboard() {
   const { name } = loadState();
-  if (!name) {
-    alert('Set your name first!');
-    return;
-  }
+  const url = name
+    ? `${BACKEND_URL}/top?name=${encodeURIComponent(name)}`
+    : `${BACKEND_URL}/top`;
 
   try {
-    const res = await fetch(`${BACKEND_URL}/top/${encodeURIComponent(name)}`);
+    const res = await fetch(url);
     const data = await res.json();
 
     if (!data.top || data.top.length === 0) {
@@ -305,18 +298,15 @@ async function showLeaderboard() {
       return;
     }
 
-    // Build leaderboard text
-    let lines = data.top.map(r => `${r.rank}. ${r.name} — ${r.high}`);
-
-    // Add your own line if not already in top 10
+    const lines = data.top.map(r => `${r.rank}. ${r.name} — ${r.high}`);
     if (data.you && data.you.rank > 10) {
-      lines.push(`…`);
+      lines.push('…');
       lines.push(`${data.you.rank}. ${data.you.name} — ${data.you.high}`);
     }
 
-    alert(lines.join('\n')); // replace with nicer dialog rendering if you want
-  } catch (err) {
-    console.error('Failed to load leaderboard', err);
+    alert(lines.join('\n')); // swap with your dialog UI when you style it
+  } catch (e) {
+    console.error('Failed to load leaderboard', e);
   }
 }
 
