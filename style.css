@@ -5,6 +5,8 @@
 }
 html, body {
   touch-action: manipulation;
+  height: 100%;
+  overflow: hidden;
 }
 body {
   background-image: url('images/kontor.jpeg');
@@ -83,25 +85,25 @@ body {
 }
 
 .title {
-  font-size: 3rem;
+  font-size: 6vh;
   color: white;
   background-color: rgb(34, 43, 47);
   border-radius: 10px;
-  padding: 10px;
+  padding: 5px;
   font-family: "Cherry Bomb One";
   margin-top: 5px;
 }
 
 #countdown {
   background-color: rgb(240, 248, 255, 0.7);
-  font-size: 1.5rem;
+  font-size: 3.5vh;
   padding: 5px;
   border-radius: 10px;
 }
 
 #score {
   background-color: rgb(240, 248, 255, 0.7);
-  font-size: 1.3rem;
+  font-size: 3.5vh;
   padding: 5px;
   border-radius: 10px;
 }
@@ -116,4 +118,24 @@ body {
   font-size: 1.5rem;
   border: 2px solid white;
   font-weight: bold;
+}
+
+dialog {
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  max-width: 300px;
+  margin: auto;
+}
+
+#btn-container {
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+#bottom-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
 }
