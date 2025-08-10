@@ -7,7 +7,12 @@ const soundSpawn = document.getElementById('s-spawn');
 const soundHit = document.getElementById('s-hit');
 const game = document.getElementById('game');
 const hsBadge = document.getElementById('highscore');
-
+const lbDialog = document.getElementById('leaderboard-dialog');
+const lbContent = document.getElementById('leaderboard-content');
+const lbClose = document.getElementById('leaderboard-close');
+const infoBtn = document.getElementById('information-btn');
+const information = document.getElementById('information');
+const infoClose = document.getElementById('information-close');
 
 const TOTAL_SPAWNS = 30;   
 const START_MS = 1200;  
@@ -224,7 +229,7 @@ function hydrateSubmitUI() {
 
   if (submitBtn) {
     submitBtn.disabled = !(high > 0 && high > submitted);
-    submitBtn.textContent = submitBtn.disabled ? 'Already submitted best' : 'Submit best to leaderboard';
+    submitBtn.textContent = submitBtn.disabled ? 'Redan skickat till topplistan' : 'Skicka till topplistan!';
   }
   if (statusEl) statusEl.textContent = '';
 }
@@ -292,22 +297,69 @@ async function showLeaderboard() {
   try {
     const res = await fetch(url);
     const data = await res.json();
-
     if (!data.top || data.top.length === 0) {
-      alert('No scores yet!');
+      lbContent.innerHTML = '<p>Inga poäng än!</p>';
+      lbDialog.showModal();
       return;
     }
+    let html = '<table><thead><tr><th>#</th><th>Namn</th><th>Poäng</th></tr></thead><tbody>';
+    data.top.forEach(r => {
+      const isYou = data.you && r.name === data.you.name && r.rank === data.you.rank;
+      html += `<tr class="${isYou ? 'you' : ''}">
+        <td>${r.rank}</td><td>${r.name}</td><td>${r.high}</td>
+      </tr>`;
+    });
 
-    const lines = data.top.map(r => `${r.rank}. ${r.name} — ${r.high}`);
     if (data.you && data.you.rank > 10) {
-      lines.push('…');
-      lines.push(`${data.you.rank}. ${data.you.name} — ${data.you.high}`);
+      html += `<tr><td colspan="3">…</td></tr>`;
+      html += `<tr class="you">
+        <td>${data.you.rank}</td><td>${data.you.name}</td><td>${data.you.high}</td>
+      </tr>`;
     }
 
-    alert(lines.join('\n')); // swap with your dialog UI when you style it
-  } catch (e) {
-    console.error('Failed to load leaderboard', e);
+    html += '</tbody></table>';
+    lbContent.innerHTML = html;
+
+    lbDialog.showModal();
+  } catch (err) {
+    console.error('Failed to load leaderboard', err);
+    lbContent.innerHTML = '<p>Kunde inte ladda topplistan.</p>';
+    lbDialog.showModal();
   }
 }
 
+
 document.getElementById('leaderboard-btn').addEventListener('click', showLeaderboard);
+lbClose.addEventListener('click', () => lbDialog.close());
+lbDialog.addEventListener('click', e => {
+  const rect = lbDialog.getBoundingClientRect();
+  if (
+    e.clientX < rect.left ||
+    e.clientX > rect.right ||
+    e.clientY < rect.top ||
+    e.clientY > rect.bottom
+  ) {
+    lbDialog.close();
+  }
+});
+
+
+infoBtn.addEventListener('click', () => {
+  information.showModal();
+});
+
+infoClose.addEventListener('click', () => {
+  information.close();
+});
+
+information.addEventListener('click', e => {
+  const rect = information.getBoundingClientRect();
+  if (
+    e.clientX < rect.left ||
+    e.clientX > rect.right ||
+    e.clientY < rect.top ||
+    e.clientY > rect.bottom
+  ) {
+    information.close();
+  }
+});

@@ -17,7 +17,19 @@
   <div class="title">Väck-a-Vikarie</div>
 
   <div class="btn-container">
-<button id="leaderboard-btn">👑 Topplista 👑</button><span id="highscore">Ditt highscore: 100</span> <button id="submit-btn">🏆</button> 
+<button id="leaderboard-btn">👑 Topplista 👑</button><span id="highscore">Ditt highscore: 100</span> <button id="submit-btn">🏆</button> <button id="information-btn">?</button>
+
+<dialog id="information">
+  <h3>Vad är detta?</h3>
+  <p>💥 Sidan är under konstruktion 💥</p>
+  <p>⚡Väck Vikarien så snabbt du kan⚡ 1-5 poäng per gubbe beroende på hur snabb man är</p>
+  <button id="information-close">Stäng</button>
+</dialog>
+<dialog id="leaderboard-dialog">
+  <h3>👑 Topplista 👑</h3>
+  <div id="leaderboard-content"></div>
+  <button id="leaderboard-close">Stäng</button>
+</dialog>
 <dialog id="submit-dialog">
     <form id="submit-form" method="dialog" class="submit-wrap">
         <h3>High score</h3>

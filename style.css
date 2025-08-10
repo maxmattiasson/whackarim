@@ -139,3 +139,17 @@ dialog {
   justify-content: space-between;
   gap: 10px;
 }
+
+#information-btn {
+  width: 5vh;
+  height: 5vh;
+  background-color: red;
+  outline: none;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+}
+
+#information > div, h3, button {
+  text-align: center;
+}
