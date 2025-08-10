@@ -2,7 +2,6 @@ const squares = document.querySelectorAll('.square');
 const score = document.getElementById('score');
 const startButton = document.getElementById('go');
 const clock = document.getElementById('timer');
-const puntos = document.getElementById('points');
 const soundSpawn = document.getElementById('s-spawn');
 const soundHit = document.getElementById('s-hit');
 const game = document.getElementById('game');
@@ -132,6 +131,14 @@ function handleClick(randomSquare, spawnTime){
     playHit();
     currentScore += points;
     score.textContent = `Poäng: ${currentScore}`;
+
+    
+    const bubble = document.createElement('span');
+    bubble.className = `points-pop p${points}`;
+    bubble.textContent = `+${points}`;
+    randomSquare.appendChild(bubble);
+    setTimeout(() => bubble.remove(), 800); 
+
   
     randomSquare.classList.remove('active');
     randomSquare.classList.add('hit');
@@ -302,25 +309,47 @@ async function showLeaderboard() {
       lbDialog.showModal();
       return;
     }
-    let html = '<table><thead><tr><th>#</th><th>Namn</th><th>Poäng</th></tr></thead><tbody>';
-    data.top.forEach(r => {
-      const isYou = data.you && r.name === data.you.name && r.rank === data.you.rank;
-      html += `<tr class="${isYou ? 'you' : ''}">
-        <td>${r.rank}</td><td>${r.name}</td><td>${r.high}</td>
-      </tr>`;
-    });
+let html = `
+  <table class="leaderboard-table">
+    <thead>
+      <tr>
+        <th class="rank-col">#</th>
+        <th class="name-col">Namn</th>
+        <th class="score-col">Poäng</th>
+      </tr>
+    </thead>
+    <tbody>
+`;
 
-    if (data.you && data.you.rank > 10) {
-      html += `<tr><td colspan="3">…</td></tr>`;
-      html += `<tr class="you">
-        <td>${data.you.rank}</td><td>${data.you.name}</td><td>${data.you.high}</td>
-      </tr>`;
-    }
+data.top.forEach(r => {
+  const isYou = data.you && r.name === data.you.name && r.rank === data.you.rank;
+  const topClass = r.rank <= 3 ? `top${r.rank}` : '';
+  const rowClass = `leaderboard-row ${isYou ? 'you' : ''} ${topClass}`.trim();
 
-    html += '</tbody></table>';
-    lbContent.innerHTML = html;
+  html += `
+    <tr class="${rowClass}">
+      <td>${r.rank}</td>
+      <td>${r.name}</td>
+      <td>${r.high}</td>
+    </tr>
+  `;
+});
 
-    lbDialog.showModal();
+if (data.you && data.you.rank > 10) {
+  html += `<tr class="dots-row"><td colspan="3">…</td></tr>`;
+  html += `
+    <tr class="leaderboard-row you">
+      <td>${data.you.rank}</td>
+      <td>${data.you.name}</td>
+      <td>${data.you.high}</td>
+    </tr>
+  `;
+}
+
+html += `</tbody></table>`;
+lbContent.innerHTML = html;
+lbDialog.showModal();
+
   } catch (err) {
     console.error('Failed to load leaderboard', err);
     lbContent.innerHTML = '<p>Kunde inte ladda topplistan.</p>';
@@ -363,3 +392,25 @@ information.addEventListener('click', e => {
     information.close();
   }
 });
+
+function getOrCreateUUID() {
+  let id = localStorage.getItem('wamUUID');
+  if (!id) {
+    id = crypto.randomUUID(); // modern browsers
+    localStorage.setItem('wamUUID', id);
+  }
+  return id;
+}
+
+(async () => {
+  const uuid = getOrCreateUUID();
+  try {
+    await fetch(`${BACKEND_URL}/track-visit`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ uuid }),
+    });
+  } catch (err) {
+    console.error('Visit tracking failed', err);
+  }
+})();

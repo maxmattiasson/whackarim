@@ -17,14 +17,14 @@ body {
   background-color: #111;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 #game {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 }
 .square {
   border: 4px solid black;
@@ -109,12 +109,13 @@ body {
 }
 
 #go {
-  width: 20vw;
+  width: 25vw;
   height: 8vh;
   background-color: rgb(34, 43, 47);
   border-radius: 15px;
   color: white;
-  font-family: serif;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  text-align: center;
   font-size: 1.5rem;
   border: 2px solid white;
   font-weight: bold;
@@ -152,4 +153,202 @@ dialog {
 
 #information > div, h3, button {
   text-align: center;
+}
+
+#highscore {
+  background-color: rgb(34, 43, 47);
+  border-radius: 10px;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 5px;
+}
+
+#leaderboard-btn {
+  border-radius: 10px;
+  outline: none;
+  color: white;
+  background-color: rgb(34, 43, 47);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+#submit-btn {
+  background-color: rgb(34, 43, 47);
+  border-radius: 10px;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 2px;
+}
+#submit-dialog {
+  background-color: #1f262a; 
+  color: #f0f0f0;
+  padding: 20px 25px;
+  border-radius: 16px;
+  font-family: 'Segoe UI', Tahoma, sans-serif; 
+  font-weight: normal;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  border: none;
+  max-width: 300px;
+  width: 100%;
+  font-weight: bold;
+}
+
+#submit-dialog h3 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+#submit-dialog label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+#submit-dialog input {
+  padding: 8px 10px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #555;
+  background-color: #2a3237;
+  color: white;
+  font-size: 1rem;
+}
+
+#submit-dialog button {
+  padding: 8px 12px;
+  background-color: #ff9800;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+#submit-dialog button:hover {
+  background-color: #e68a00;
+}
+
+#submit-dialog *:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+
+#leaderboard-dialog {
+  background-color: #1f262a;
+  color: #f0f0f0;
+  padding: 20px 25px;
+  border-radius: 16px;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  border: none;
+  max-width: 360px;
+  width: 90vw;
+  max-height: 85vh;       
+}
+
+#leaderboard-content {
+  max-height: 60vh;       
+  overflow: auto;
+  margin-top: 8px;
+}
+
+#leaderboard-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+#leaderboard-content thead th {
+  position: sticky;
+  top: 0;
+  background-color: #333b40;
+  z-index: 1;
+}
+
+#leaderboard-content th,
+#leaderboard-content td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid #2f363a;
+}
+
+#leaderboard-content tbody tr:nth-child(even):not(.you):not(.top1):not(.top2):not(.top3) {
+  background-color: #262d31;
+}
+#leaderboard-content tr.you {
+  background-color: #ffe49b;
+  color: #000;
+  font-weight: 700;
+}
+
+/* Dots separator */
+#leaderboard-content tr.dots-row td {
+  text-align: center;
+  font-style: italic;
+  color: #aaa;
+}
+
+#leaderboard-content .rank-col { width: 56px; text-align: center; }
+#leaderboard-content .score-col { width: 90px; text-align: right; }
+
+#leaderboard-content tr.top1 td:first-child::before { content: "🥇 "; }
+#leaderboard-content tr.top2 td:first-child::before { content: "🥈 "; }
+#leaderboard-content tr.top3 td:first-child::before { content: "🥉 "; }
+
+#leaderboard-content tr.top1 { background: linear-gradient(90deg, #3a2f00 0%, #4a3a00 100%); }
+#leaderboard-content tr.top2 { background: linear-gradient(90deg, #2f2f35 0%, #3a3a46 100%); }
+#leaderboard-content tr.top3 { background: linear-gradient(90deg, #3a2a22 0%, #4a352a 100%); }
+#leaderboard-content tr.top1 td,
+#leaderboard-content tr.top2 td,
+#leaderboard-content tr.top3 td { color: #ffd; font-weight: 700; }
+
+#leaderboard-content tr.you.top1,
+#leaderboard-content tr.you.top2,
+#leaderboard-content tr.you.top3 {
+  outline: 2px solid #ffd54f;
+  outline-offset: -2px;
+}
+
+#leaderboard-dialog::backdrop,
+#submit-dialog::backdrop,
+#information::backdrop {
+  background: rgba(0,0,0,0.6);
+}
+
+.mole, .mole-hit, .hole { -webkit-user-drag: none; user-select: none; }
+
+.square { cursor: pointer; }
+
+.points-pop {
+  position: absolute;
+  left: 50%;
+  top: 38%;
+  transform: translate(-50%, 0) scale(0.9);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-weight: 800;
+  font-size: clamp(16px, 3.5vmin, 28px);
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  pointer-events: none;
+  animation: pts-pop 700ms ease-out forwards;
+}
+
+.points-pop.p5 { color: #ffd54f; }  /* 5 pts = gold */
+.points-pop.p4 { color: #ffa726; }
+.points-pop.p3 { color: #66bb6a; }
+.points-pop.p2 { color: #29b6f6; }
+.points-pop.p1 { color: #ef5350; }
+
+@keyframes pts-pop {
+  0%   { opacity: 0; transform: translate(-50%, 6px) scale(0.9); }
+  20%  { opacity: 1; transform: translate(-50%, -4px) scale(1.08); }
+  100% { opacity: 0; transform: translate(-50%, -28px) scale(0.98); }
 }

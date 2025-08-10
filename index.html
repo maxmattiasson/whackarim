@@ -15,14 +15,14 @@
 <body>
 <div id="game">
   <div class="title">Väck-a-Vikarie</div>
-
+<button id="leaderboard-btn">👑 Topplista 👑</button>
   <div class="btn-container">
-<button id="leaderboard-btn">👑 Topplista 👑</button><span id="highscore">Ditt highscore: 100</span> <button id="submit-btn">🏆</button> <button id="information-btn">?</button>
+<span id="highscore"></span> <button id="submit-btn">Skicka till topplistan 🏆</button> <button id="information-btn">?</button>
 
 <dialog id="information">
   <h3>Vad är detta?</h3>
   <p>💥 Sidan är under konstruktion 💥</p>
-  <p>⚡Väck Vikarien så snabbt du kan⚡ 1-5 poäng per gubbe beroende på hur snabb man är</p>
+  <p>⚡Väck Vikarien så snabbt du kan⚡ 1-5 poäng per vikarie beroende på hur snabbt du klickar 🐌🐇</p>
   <button id="information-close">Stäng</button>
 </dialog>
 <dialog id="leaderboard-dialog">
@@ -32,11 +32,11 @@
 </dialog>
 <dialog id="submit-dialog">
     <form id="submit-form" method="dialog" class="submit-wrap">
-        <h3>High score</h3>
+        <h3>Ladda upp </h3>
         <div id="hs-line">Ditt bästa: <span id="hs-value">0</span> poäng</div>
 
         <label for="player-name">Namn:</label>
-        <input id="player-name" name="player-name" type="text" placeholder="Your name" autocomplete="name" required />
+        <input id="player-name" name="player-name" type="text" placeholder="" autocomplete="name" required />
 
         <button id="submit-best" type="button">Skicka till Topplistan!</button>
         <div id="submit-status"></div>
